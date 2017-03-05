@@ -24,8 +24,6 @@
     self.imageNames = @[@"image01.jpg", @"image02.jpg", @"image03.jpg"];
     self.scrollView = [[XBPictureScrollView alloc] initWithFrame:CGRectMake(0, 100, self.view.frame.size.width, 200)];
     self.scrollView.autoScrollTimeInterval = 2;
-    self.scrollView.pageIndicatorTintColor = [UIColor blackColor];
-    self.scrollView.currentPageIndicatorTintColor = [UIColor redColor];
     self.scrollView.delegate = self;
     [self.view addSubview:self.scrollView];
 }

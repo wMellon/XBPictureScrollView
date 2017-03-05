@@ -49,7 +49,8 @@
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
     //所以只剩下手动拖拽了
     if(!self.autoScroll){
-        NSInteger temp = scrollView.contentOffset.x / scrollView.frame.size.width;
+        CGFloat offset = (CGFloat)scrollView.contentOffset.x / scrollView.frame.size.width;
+        NSInteger temp = offset;
         self.currentIndex = temp;
         if(self.currentIndex >= _numbersOfPic + 1){
             self.currentIndex = self.initIndex;
@@ -61,7 +62,15 @@
             [self.scrollView scrollRectToVisible:CGRectMake(self.currentIndex * scrollView.frame.size.width, 0, scrollView.frame.size.width, scrollView.frame.size.height) animated:NO];
         }
         //设置pageControl
-        self.pageControl.currentPage = self.currentIndex - 1;
+        NSInteger page = round(offset);
+        if(page >= _numbersOfPic + 1){
+            //最后一张了
+            self.pageControl.currentPage = 0;
+        }else if(page == 0){
+            self.pageControl.currentPage = _numbersOfPic - 1;
+        }else{
+            self.pageControl.currentPage = round(offset) - 1;
+        }
     }
 }
 
